@@ -1,0 +1,568 @@
+# i3 config file (v4)
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# Set mod key (Mod1=<Alt>, Mod4=<Super>)
+set $mod Mod4
+
+# set default desktop layout (default is tiling)
+#workspace_layout tabbed
+
+# Com essa opção você pode mover as janelas com Alt + botão esquerdo do mouse e redimensionar com Alt + botão direito do mouse.
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
+
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+new_window pixel 1
+new_float normal
+
+# Desativar as bordas das janelas 
+#hide_edge_borders none
+hide_edge_borders smart
+
+#Focus follows mouse
+#focus_follows_mouse yes
+focus_follows_mouse no
+
+#Focus on window activation
+focus_on_window_activation urgent
+
+# change borders
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+bindsym $mod+n border normal
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font pango: Cantarell 11, Icons 9
+#font pango: Bitocra 11, Icons 10
+font pango: Terminus 11, Icons 10
+#font pango: FontAwesome 11, Icons 10
+
+#######################################
+# MOC Player Control
+bindsym XF86AudioPlay exec mocp --play-pause 
+bindsym XF86AudioStop exec mocp --stop
+bindsym XF86AudioPrev exec mocp --previous
+bindsym XF86AudioNext exec mocp --next
+
+# Media player controls (VLC)
+#bindsym XF86AudioPlay exec playerctl play
+#bindsym XF86AudioPause exec playerctl pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous
+
+# Pulse Audio controls
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2% #increase sound volume
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2% #decrease sound volume
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+
+# start Xterm
+bindsym $mod+Return exec xterm ;workspace 
+
+bindsym $mod+Ctrl+m exec xterm -e 'mocp' ;workspace 
+bindsym $mod+Ctrl+a exec xterm -e 'alsamixer' ;workspace 
+bindsym $mod+Ctrl+r exec xterm -e 'ranger' ;workspace 
+bindsym $mod+Ctrl+n exec xterm -e ncmpcpp -S visualizer ;workspace 
+
+
+## kill focused window
+bindsym $mod+q kill
+
+#
+## Fecha workspace e pula pra workspace 
+#bindsym $mod+b kill , workspace 
+bindsym Cancel kill , workspace 
+#
+## Fecha workspace e pula pra outra abertar
+#bindsym $mod+Delete kill , workspace prev
+#
+# Microsoft/Logitech keyboard (FN+Pause)
+bindsym Pause kill , workspace prev
+  
+
+#########################
+## CapsLock/NumLock/SrollLock Event
+bindsym Caps_Lock ;exec paplay /home/zack/.sounds/ubuntu/stereo/complete.oga
+bindsym Num_Lock ;exec paplay /home/zack/.sounds/freedesktop/stereo/window-attention.oga
+bindsym Scroll_Lock ;exec paplay /home/zack/.sounds/freedesktop/stereo/phone-outgoing-calling.oga
+
+
+########################################################
+# Menus (Programs launcher)
+########################################################
+# Dmenu
+#bindsym $mod+space exec dmenu_run -i -p 'Manjaro Linux' -fn 'FontAwesome:pixelsize=11' -nb '#2B373E' -nf '#ffffff' -sf '#fdf6e3' -sb '#b58900' -l 20
+
+# Rofi run (Microsoft/Logitech keyboard)
+bindsym Menu exec rofi -sidebar-mode -show drun -line 3 -eh 2 -width 70 -padding 100 -opacity "70" -bw 0 -bc -font "Terminus 11" -rnow -no-disable-history -no-levenshtein-sort -only-match -kb-mode-next Alt+Left
+
+#bindsym $mod+space exec rofi -show drun -font "Terminus 11" -theme ~/.config/i3/scripts/sidebar.rasi
+bindsym $mod+space exec rofi -show run -font "Terminus 11" -theme ~/.config/i3/scripts/sidestyle.rasi
+
+##########################
+##### Menus de saída #####
+##########################
+
+# Nagbar:
+set $Locker i3lock && sleep 1
+set $mode_system Exit   (B)loquear | (H)ibernar | (L)ogout | (S)uspender | (R)einiciar | (D)esligar
+mode "$mode_system" {
+    bindsym b exec --no-startup-id i3lock-fancy
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+    bindsym l exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym d exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+#bindsym $mod+d mode "$mode_system"
+
+### Morc menu
+# start program launcher
+#bindsym $mod+z  exec --no-startup-id dmenu_recency -l 50
+# launch categorized menu
+#bindsym $mod+z exec --no-startup-id morc_menu
+
+
+#####################################
+# Applications
+
+# Simple Screen Recorder
+bindsym $mod+g exec green-recorder ;workspace 
+
+#Compton
+bindsym $mod+t exec --no-startup-id pkill compton ;exec notify-send 'Compton Off' ;exec paplay /home/zack/.sounds/ubuntu/stereo/dialog-error.ogg
+bindsym $mod+Ctrl+t exec --no-startup-id compton -f ;exec notify-send 'Compton On' ;exec paplay /home/zack/.sounds/ubuntu/stereo/button-pressed.ogg
+
+bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'Restart dunst'"
+
+bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
+
+bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+
+
+#####################################
+#bindsym Print exec xfce4-screenshooter
+bindsym Print exec xfce4-screenshooter ;exec paplay /home/zack/.sounds/ubuntu/stereo/screen-capture.oga
+
+
+###########################################################
+# Start a program with a key binding & workspace          
+###########################################################
+#
+bindsym $mod+1 exec palemoon ;workspace 
+bindsym $mod+2 exec firefox ;workspace 
+
+bindsym XF86Favorites exec chromium ;workspace 
+#
+bindsym $mod+3 exec simple-scan ;workspace 
+#
+bindsym $mod+4 exec supertux2 ;workspace 
+#
+bindsym $mod+5 exec popcorntime ;workspace 
+#
+bindsym $mod+6 exec gvim ;workspace 
+bindsym $mod+7 exec wps ;workspace 
+bindsym $mod+8 exec gedit ;workspace 
+#
+bindsym $mod+9 exec opera ;workspace 
+bindsym $mod+0 exec stremio ;workspace  
+
+
+##############################################
+# Logitech keyboard Config / Jetline keyboard
+##############################################
+# Tecla: FN+F1 (Worksapce 1)
+bindsym XF86HomePage workspace 
+#
+# Tecla: FN+F2 (Thunderbird)
+bindsym XF86Mail exec ~/Telegram/Telegram ;workspace 
+bindsym $mod+F7 exec Whatsapp ;workspace 
+#
+# Tecla: FN+F3 (PCmanFM)
+#bindsym XF86Search exec pcmanfm ;workspace 
+bindsym XF86MyComputer exec pcmanfm ;workspace 
+#
+# Tecla: FN+F4 (VLC)
+#bindsym XF86Tools exec vlc ;workspace 
+bindsym XF86AudioMedia exec vlc ;workspace 
+
+# Tecla: FN+F5, F6, F7 não detectado
+# Tecla: FN+F6 (Rofi Exit)
+# Tecla: FN+F11 pamac-manager (Microsoft)
+
+# Tecla: FN+F12 (Calculator)
+bindsym XF86Calculator exec galculator ;workspace 
+
+# Jetline keyboard
+# Pamac Manager
+bindsym XF86Search exec pamac-manager ;workspace 
+
+# VirtualBox
+bindsym $mod+F9 exec vrtualbox ;workspace 
+
+
+#                                  ::       
+######################################
+# Application rules
+
+# Chrome, Firefox, Telegram
+  assign [class="^Chromium$"] → 
+  assign [class="^Pale moon$"] → 
+  assign [class="^Firefox$"] → 
+  assign [class="^Opera$"] → 
+
+# Terminator
+  assign [class="^Terminator$"] → 
+  assign [class="^Xterm$"] → 
+
+# PCmanFM
+  assign [class="^Pcmanfm$"] → 
+
+# Scanner
+  assign [class="^Simple-Scan$"] → 
+
+# GVim, Libreoffice, Mousepad
+  assign [class="^Gvim$"] → 
+  assign [class="^WPS Writer$"] → 
+  assign [class="^Libreoffice$"] → 
+  assign [class="^Gedit$"] → 
+
+# Thunderbird, Telegram...
+# assign [class="^Thunderbird$"] → 
+  assign [class="^Telegram$"] → 
+  assign [class="^WhatsApp$"] → 
+
+# VLC, Spotify
+  assign [class="^VLC$"] →  
+  assign [class="^Spotify$"] → 
+  assign [class="^Stremio$"] → 
+  assign [class="^Popcorntime$"] → 
+
+# Calc
+  assign [class="^Galculator$"] → 
+
+# Várias aplicações na mesma workspace
+  assign [class="^Pamac-manager$"] → 
+  assign [class="^Timeshift$"] → 
+  assign [class="^Transmission$"] → 
+  assign [class="^Lxappearance$"] → 
+  assign [class="^Gimp$"] → 
+  assign [class="^Pavucontrol$"] → 
+  assign [class="^Nitrogen$"] → 
+  assign [class="^Green-Recorder$"] → 
+
+# Electrum
+  assign [class="^Electrum$"] → 
+
+# TimeShift
+  assign [class="^Timeshift$"] → 
+
+# VirtualBox
+  assign [class="^Virtualbox$"] → 
+
+ 
+# Rename workspace with i3-input using numbers and text
+bindsym $mod+Shift+n exec i3-input -F 'rename workspace to "%s"' -P 'Renomear workspace: '
+  
+
+#########################################  
+# Make a terminal sticky that was started as a notepad
+#for_window [instance=notepad] sticky enable
+
+# The middle button over a titlebar kills the window
+# Fechar work-tab com clique direito
+bindsym --release button3 kill
+#bindsym --whole-window button3 kill
+
+#########################################
+## Moving on
+# Saltar para janela urgente
+bindsym $mod+x [urgent=latest] focus
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+
+# Mover entre workspaces 
+#bindsym $mod+Left workspace prev
+#bindsym $mod+Right workspace next
+# Multimedia Keyboard
+bindsym XF86Back workspace prev
+bindsym XF86Forward workspace next
+
+# Foco de aplicativo aberto em abas
+#tabbed
+bindsym $mod+Tab focus right
+#stacking
+bindsym $mod+Up focus up
+bindsym own focus down
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# workspace back and forth (with/without active container)
+#workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
+
+#bindsym $mod+b workspace back_and_forth
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
+# Move window
+bindsym $mod+c move position center
+
+########################
+#### Layout
+
+# Janelas sem titulos
+#new_window 1pixel
+#new_float 1pixel
+# A 3 px border
+new_window pixel 3
+
+# split orientation
+bindsym $mod+h split h;exec notify-send 'Horizontally'
+bindsym $mod+v split v;exec notify-send 'Vertically'
+#bindsym $mod+q split toggle
+
+# toggle fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle;exec notify-send 'FullScreen'
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking;exec notify-send 'mode Stacking'
+bindsym $mod+w layout tabbed;exec notify-send 'mode Tabbed'
+bindsym $mod+e layout toggle split;exec notify-send 'mode Toggle Split'
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym focus mode_toggle
+
+# toggle sticky
+bindsym $mod+Shift+s sticky toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+
+#Scratchpad
+# move the currently focused window to the scratchpad
+#bindsym $mod+Shift+minus move scratchpad
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+#bindsym $mod+minus scratchpad show
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 
+
+
+################################
+## floating mode
+# Open specific applications in floating mode
+
+for_window [title="alsamixer"] floating enable border none
+for_window [class="Calamares"] floating enable border none
+for_window [class="Clipgrab"] floating enable border none
+for_window [title="File Transfer*"] floating enable border none
+for_window [class="Galculator"] floating enable border none
+for_window [class="Electrum"] floating enable border none
+for_window [class="GParted"] floating enable border none
+for_window [title="i3_help"] floating enable border normal
+for_window [class="Lightdm-gtk-greeter-settings"] floating enable border none
+for_window [class="Lxappearance"] floating enable border none
+for_window [class="Manjaro Settings Manager"] floating enable border none
+for_window [class="Nitrogen"] floating enable border none
+#for_window [class="Pamac-manager"] floating enable border none
+for_window [class="Pamac-manager"] floating enable border none; focus mode_toggle
+for_window [class="Pavucontrol"] floating enable border none
+for_window [class="Qtconfig-qt4"] floating enable border none
+for_window [class="Simple-scan"] floating enable border none
+for_window [class="(?i)System-config-printer.py"] floating enable border none
+#for_window [class="Skype"] floating enable border normal
+for_window [class="Thus"] floating enable border none
+for_window [class="Timeset-gui"] floating enable border none
+for_window [class="(?i)virtualbox"] floating enable border none
+for_window [class="Vlc"] floating enable border none
+for_window [class="Telegram"] floating enable border none
+for_window [class="Xterm"] floating enable border none
+for_window [class="Xfburn"] floating enable border none
+#for_window [class="Pcmanfm"] floating enable border normal
+for_window [class="Vlc"] floating enable border none
+#for_window [class="Grub-customizer"] floating enable border normal
+for_window [class="Transmission-gtk"] floating enable border none
+for_window [class="Green-Recorder"] floating enable border none
+for_window [class="CPUpower-gui"] floating enable border none
+
+
+
+########################################
+## Reset && Reload
+########################################
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+
+#######################################
+## Resize window (you can also use the mouse for that)
+#######################################
+bindsym $mod+r mode "  "
+mode "  " {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym odiaeresis resize grow width 5 px or 5 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # exit resize mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+##############################################################################
+# Autostart applications
+##############################################################################
+## adjustment of i3bar battery reading (only run at the very first login):
+#exec --no-startup-id /usr/bin/adjust_i3statusconf
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/bin/compton --config ~/bin/compton.conf
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id nm-applet
+exec --no-startup-id volumeicon
+#exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+#exec --no-startup-id /usr/bin/radiotray-ng
+#exec --no-startup-id xfce4-clipman
+#exec --no-startup-id blueman
+#exec_always --no-startup-id sbxkb
+#exec --no-startup-id conky
+#exec --no-startup-id start_conky_maia
+#exec --no-startup-id start_conky_green
+#exec --no-startup-id xautolock -time 30 -locker i3lock-fancy
+exec --no-startup-id numlockx
+#exec --no-startup-id indicator-keylock
+#exec --no-startup-id hp-systray
+exec --no-startup-id guake
+exec --no-startup-id /usr/bin/caffeine-indicator
+#exec --no-startup-id dropbox
+#exec --no-startup-id ~/Telegram/Telegram -startintray %m
+#exec --no-startup-id thunderbird
+exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+#exec --no-startup-id solaar
+exec xscreensaver -no-splash
+exec --no-startup-id pulseaudio
+#exec --no-startup-id /opt/extras.ubuntu.com/calendar-indicator/bin/calendar-indicator
+#exec --no-startup-id /usr/sbin/mouseserver
+
+# Servidor de música
+exec --no-startup-id mpd
+
+#Workspaces
+#exec --no-startup-id ~/.config/i3/scripts/switch-workspace.py
+
+#Polybar
+exec_always --no-startup-id killall polybar; polybar top &
+exec_always --no-startup-id killall polybar; polybar bottom &
+
+
+
+#############################################
+##  Numix Blank (customized)
+#############################################
+
+# Layout colors             bord    bg      text
+client.focused              #222222 #222222 #BBBBBB #4F4F4F
+client.focused_inactive     #1A1A1A #1A1A1A #747474 #747474
+client.unfocused            #1A1A1A #1A1A1A #747474 #1A1A1A
+client.urgent               #1A1A1A #EA4C59 #a5a5a5 #1A1A1A
+client.background           #121212
+
+
+#############################
+# hide/unhide i3status bar
+#bindsym $mod+m bar mode toggle
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+#bar {
+#        status_command i3status
+#}
+
+
+#############################
+### settings for i3-gaps: ###
+#############################
+#############################
+# Set inner/outer gaps
+gaps inner 5
+gaps outer 5
+
+# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
+# gaps inner|outer current|all set|plus|minus <px>
+# gaps inner all set 10
+# gaps outer all plus 5
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+smart_borders on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+#bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}

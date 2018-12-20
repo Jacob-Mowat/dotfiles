@@ -7,9 +7,9 @@ install-packages:
 	yaourt -S --needed --noconfirm `cat packages-list.txt`
  
 enable-services:
-	sudo systemctl enable lightdm NetworkManager tlp tlp-sleep
-	sudo systemctl disable systemd-rfkill
-	sudo tlp start
+	# sudo systemctl enable lightdm NetworkManager tlp tlp-sleep
+	# sudo systemctl disable systemd-rfkill
+	# sudo tlp start
 
 link-config: 
 	./scripts/stow-all.sh
@@ -18,4 +18,4 @@ set-shell:
 	chsh -s `which zsh` # `fish` is another alternative
 
 sync-neovim:
-	./configs/neovim/.config/nvim/sync.sh
+	# ./configs/neovim/.config/nvim/sync.sh
