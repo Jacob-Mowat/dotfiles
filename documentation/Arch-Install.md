@@ -255,3 +255,6 @@
     ```
 
 1.  Reboot and enable Secure Boot in UEFI.
+
+## Credit
+All credit for this documentation goes too github user: maximbaz
