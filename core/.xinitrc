@@ -21,4 +21,6 @@ if [ -f ~/.xinitrc-local ]; then
   ~/.xinitrc-local
 fi
 
+feh --bg-scale /home/zaxquit/Pictures/background.jpg
+
 exec i3
