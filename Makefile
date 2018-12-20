@@ -1,11 +1,11 @@
-default: install-yaourt install-packages link-all set-shell install-rofi
+default: install-yaourt install-packages install-rofi link-all set-rofi-theme set-shell sync-neovim
 
 install-yaourt:
 	./scripts/install-yaourt.sh
  
 install-packages:
 	yaourt -S --needed --noconfirm `cat packages-list.txt`
-	
+
 install-rofi:
 	./scripts/install-rofi.sh
  
@@ -18,8 +18,11 @@ link-all:
 	./scripts/stow-core.sh
 	./scripts/stow-config.sh
 
+set-rofi-theme:
+	rofi-theme-selector -theme-str "@theme \"onedark\""
+
 set-shell:
 	chsh -s `which zsh` # `fish` is another alternative
 
 sync-neovim:
-	# ./configs/neovim/.config/nvim/sync.sh
+	~/.config/nvim/sync.sh

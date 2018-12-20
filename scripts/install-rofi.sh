@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# prevents ../rofi getting deleted at then end before linking is done
+cd scripts
+
 # Clone the rofi repo
 git clone https://github.com/DaveDavenport/rofi
 

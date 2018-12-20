@@ -1,5 +1,7 @@
 call plug#begin()
 
+Plug 'liuchengxu/space-vim-dark'
+
 execute "source" Dot("plugins.vim")
 
 call plug#end()

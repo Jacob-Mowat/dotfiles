@@ -30,7 +30,7 @@ focus_on_window_activation urgent
 
 # change borders
 bindsym $mod+u border none
-bindsym $mod+y border pixel 1
+bindsym $mod+y border pixel 5
 bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -59,9 +59,17 @@ bindsym XF86AudioNext exec mocp --next
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2% #decrease sound volume
 #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
+# Use rofi
+bindsym $mod+Tab exec rofi -show window
+set $rofiexec exec rofi -show drun -eh 2 -padding 16
+bindsym $mod+d $rofiexec
+bindsym XF86Search $rofiexec
 
-# start Xterm
-bindsym $mod+Return exec xterm ;workspace 
+bindsym $mod+shift+d exec rofi -show run -eh 2 -padding 16
+
+
+# start Kitty
+bindsym $mod+Return exec kitty ;workspace 
 
 bindsym $mod+Ctrl+m exec xterm -e 'mocp' ;workspace 
 bindsym $mod+Ctrl+a exec xterm -e 'alsamixer' ;workspace 
@@ -86,9 +94,9 @@ bindsym Pause kill , workspace prev
 
 #########################
 ## CapsLock/NumLock/SrollLock Event
-bindsym Caps_Lock ;exec paplay /home/zack/.sounds/ubuntu/stereo/complete.oga
-bindsym Num_Lock ;exec paplay /home/zack/.sounds/freedesktop/stereo/window-attention.oga
-bindsym Scroll_Lock ;exec paplay /home/zack/.sounds/freedesktop/stereo/phone-outgoing-calling.oga
+# bindsym Caps_Lock ;exec paplay /home/zack/.sounds/ubuntu/stereo/complete.oga
+# bindsym Num_Lock ;exec paplay /home/zack/.sounds/freedesktop/stereo/window-attention.oga
+# bindsym Scroll_Lock ;exec paplay /home/zack/.sounds/freedesktop/stereo/phone-outgoing-calling.oga
 
 
 ########################################################
