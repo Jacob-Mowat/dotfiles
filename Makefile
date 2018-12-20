@@ -1,10 +1,13 @@
-default: install-yaourt install-packages link-all set-shell
+default: install-yaourt install-packages link-all set-shell install-rofi
 
 install-yaourt:
 	./scripts/install-yaourt.sh
  
 install-packages:
 	yaourt -S --needed --noconfirm `cat packages-list.txt`
+	
+install-rofi:
+	./scripts/install-rofi.sh
  
 enable-services:
 	# sudo systemctl enable lightdm NetworkManager tlp tlp-sleep

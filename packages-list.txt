@@ -90,3 +90,4 @@ libcurl-compat
 jq
 playerctl
 polybar
+check
