@@ -4,7 +4,7 @@
 set -xe
 
 # Make sure the following is installed 
-pacman -Sy --needed base-devel git wget yajl
+sudo pacman -Sy --needed base-devel git wget yajl
 
 # Make directory for the `package-query` repo and the `yaourt` repo.
 mkdir -p temp-yaourt-repos
