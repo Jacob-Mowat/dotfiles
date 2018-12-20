@@ -3,7 +3,7 @@
 # Enable command full-tracing(x) and error handling(e)
 set -xe
 
-# Make sure `git` is installed
+# Make sure `git` is instald
 sudo pacman -Sy git
 
 # Make temporary directory
