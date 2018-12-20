@@ -14,7 +14,7 @@ set $mod Mod4
 floating_modifier $mod
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-new_window pixel 1
+new_window pixel 10
 new_float normal
 
 # Desativar as bordas das janelas 
@@ -41,33 +41,15 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 font pango: Terminus 11, Icons 10
 #font pango: FontAwesome 11, Icons 10
 
-#######################################
-# MOC Player Control
-bindsym XF86AudioPlay exec mocp --play-pause 
-bindsym XF86AudioStop exec mocp --stop
-bindsym XF86AudioPrev exec mocp --previous
-bindsym XF86AudioNext exec mocp --next
-
-# Media player controls (VLC)
-#bindsym XF86AudioPlay exec playerctl play
-#bindsym XF86AudioPause exec playerctl pause
-#bindsym XF86AudioNext exec playerctl next
-#bindsym XF86AudioPrev exec playerctl previous
-
-# Pulse Audio controls
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2% #increase sound volume
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2% #decrease sound volume
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-
 # Use rofi
 bindsym $mod+Tab exec rofi -show window
 
 # start Kitty
-bindsym $mod+Return exec kitty ;workspace 
+bindsym $mod+Return exec kitty
 
 bindsym $mod+Ctrl+m exec xterm -e 'mocp' ;workspace 
 bindsym $mod+Ctrl+a exec xterm -e 'alsamixer' ;workspace 
-bindsym $mod+Ctrl+r exec xterm -e 'ranger' ;workspace 
+bindsym $mod+Ctrl+r exec kitty -e 'ranger'
 bindsym $mod+Ctrl+n exec xterm -e ncmpcpp -S visualizer ;workspace 
 
 
@@ -78,12 +60,6 @@ bindsym $mod+q kill
 ## Fecha workspace e pula pra workspace 
 #bindsym $mod+b kill , workspace 
 bindsym Cancel kill , workspace 
-#
-## Fecha workspace e pula pra outra abertar
-#bindsym $mod+Delete kill , workspace prev
-#
-# Microsoft/Logitech keyboard (FN+Pause)
-bindsym Pause kill , workspace prev
   
 
 #########################
@@ -99,9 +75,6 @@ bindsym Pause kill , workspace prev
 # Dmenu
 #bindsym $mod+space exec dmenu_run -i -p 'Manjaro Linux' -fn 'FontAwesome:pixelsize=11' -nb '#2B373E' -nf '#ffffff' -sf '#fdf6e3' -sb '#b58900' -l 20
 
-# Rofi run (Microsoft/Logitech keyboard)
-bindsym Menu exec rofi -sidebar-mode -show drun -line 3 -eh 2 -width 70 -padding 100 -opacity "70" -bw 0 -bc -font "Terminus 11" -rnow -no-disable-history -no-levenshtein-sort -only-match -kb-mode-next Alt+Left
-
 #bindsym $mod+space exec rofi -show drun -font "Terminus 11" -theme ~/.config/i3/scripts/sidebar.rasi
 bindsym $mod+space exec rofi -show run -font "Terminus 11"
 
@@ -111,14 +84,14 @@ bindsym $mod+space exec rofi -show run -font "Terminus 11"
 
 # Nagbar:
 set $Locker i3lock && sleep 1
-set $mode_system Exit   (B)loquear | (H)ibernar | (L)ogout | (S)uspender | (R)einiciar | (D)esligar
+set $mode_system Exit   (F)ancy | (H)ibernate | (L)ogout | (S)uspend | (R)eboot | (S)hutdown
 mode "$mode_system" {
-    bindsym b exec --no-startup-id i3lock-fancy
+    bindsym f exec --no-startup-id i3lock-fancy
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym l exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym  exec --no-startup-id systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym d exec --no-startup-id systemctl poweroff -i, mode "default"
+    bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -323,12 +296,7 @@ bindsym $mod+c move position center
 
 ########################
 #### Layout
-
-# Janelas sem titulos
-#new_window 1pixel
-#new_float 1pixel
-# A 3 px border
-new_window pixel 1
+########################
 
 # split orientation
 bindsym $mod+h split h;exec notify-send 'Horizontally'
@@ -487,6 +455,8 @@ exec --no-startup-id mpd
 exec_always --no-startup-id killall polybar; polybar top &
 exec_always --no-startup-id killall polybar; polybar bottom &
 
+# execute nitrogen
+exec --no-startup-id nitrogen --restore
 
 
 #############################################

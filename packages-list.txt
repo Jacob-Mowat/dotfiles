@@ -91,3 +91,4 @@ jq
 playerctl
 polybar
 check
+nitrogen
