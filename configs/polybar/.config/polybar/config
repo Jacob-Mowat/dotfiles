@@ -1,0 +1,273 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+;[colors]
+;background = #222
+;background-alt = #444
+;foreground = #dfdfdf
+;foreground-alt = #55
+;primary = #ffb52a
+;secondary = #e60053
+;alert = #bd2c40
+
+[global/wm]
+margin-top = 3
+margin-bottom = 3
+
+[settings]
+screenchange-reload = true
+
+
+[bar/top]
+bottom = false
+monitor = VGA-0
+width = 100%
+height = 25
+
+modules-left = apps i3
+modules-center = mpd
+modules-right = 
+
+;Cores do painel
+;background transparent
+background = #00000000
+;Flatabulous Theme
+;background = #434343
+;Arc Theme
+;background = #2F343F
+;Numix Theme
+;background = #444444
+
+line-size = 1
+
+;Traço acima no módulo
+overline-size = 1
+;overline-color = #FF0000
+;Numix theme
+overline-color = E4524B
+
+;Traço abaixo no módulo
+;underline-size = 1
+;underline-color = #FF0000
+
+;Traço abaixo em todo painel
+;border-bottom-size = 1
+;border-bottom-color = #BBBBBB
+
+spacing = 3
+padding-left = 2
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 1
+
+;font-N = <fontconfig pattern>;<vertical offset>
+font-0 = Terminus:pixelsize=12;0
+font-1 = Terminus:fontformat=truetype:size=12:antialias=false;0
+font-2 = FontAwesome:pixelsize=10;0
+font-3 = MaterialDesignIcons:size=11;0
+
+;Systray
+tray-position = right
+tray-padding = 1
+;tray-transparent = false
+tray-transparent = true
+;tray-background = #0000000
+tray-detached = true
+;tray-offset-x = -6
+;tray-offset-y = 3
+tray-offset-x = 1
+tray-offset-y = -1
+tray-scale = 1.0
+
+;Navegação
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+;click-left = i3wm-wsnext
+;click-right = i3wm-wsprev
+
+
+[bar/bottom]
+monitor = VGA-0
+bottom = true
+width = 100%
+height = 27
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+click-left = i3wm-wsnext
+click-right = i3wm-wsprev
+
+modules-left = cpu memory eth
+modules-center = date1 date2
+modules-right = mocp volume dropbox powermenu
+
+;tray-position = right
+;tray-padding = 1
+;tray-transparent = false
+;tray-detached = true
+;tray-background = #000000
+;tray-offset-x = -2
+;tray-offset-y = -2
+;tray-scale = 1.0
+;tray-maxsize = 14
+
+;Cores do painel
+;background transparente
+background = #0000000
+;Flatabulous Master
+;background = #434343
+;background = #2F343F
+;foreground = ${colors.foreground}
+;Numix Theme
+;background = #444444
+
+;Traço acima
+;overline-size = 1
+;overline-color = #FF0000
+;Traço abaixo
+underline-size = 2
+underline-color = #FF0000
+
+;Traço em todo painel
+;border-top-size = 1
+;border-top-color = #BBBBBB
+
+spacing = 2
+padding-left = 1
+padding-right = 1
+module-margin-left = 1
+module-margin-right = 1
+
+;font-N = <fontconfig pattern>;<vertical offset>
+font-0 = Terminus:pixelsize=12;0
+font-1 = Terminus:fontformat=truetype:size=12:antialias=false;0
+font-2 = FontAwesome:pixelsize=10;0
+font-3 = MaterialDesignIcons:size=11;0
+
+
+;************
+; Modules
+;************
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+;pin-workspaces = true
+;wrapping-scroll = true
+;strip-wsnumbers = true
+
+enable-click = true
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+click-left = i3wm-wsprev
+;click-right = i3wm-wsnext
+
+label-mode = %mode%
+label-mode-padding = 1
+label-mode-foreground = #BBBBBB
+
+label-focused = %name%
+;label-focused = 
+;label-focused = 
+
+label-indicator-padding = 2
+label-indicator-background = #BBBBBB
+label-indicator-underline = #FF0000
+;label-indicator-overline = #FF0000
+
+label-focused-foreground = #BBBBBB
+label-focused-padding = 2
+;label-focused-background = #383838
+label-focused-underline = #FF0000
+;label-focused-overline= #FF0000
+
+label-unfocused = %name%
+;label-unfocused = 
+label-unfocused-foreground = #747474
+label-unfocused-padding = 1
+
+label-visible = %name
+;label-visible = 
+label-visible-foregroud = #888888
+label-visible-padding = 1
+label-visible-background = #BBBBBB
+label-visible-underline = #FF0000
+;label-visible-overline = #FF0000
+
+label-urgent = %name%
+;label-urgent = 
+;label-urgent = 
+;label-urgent = 
+;label-urgent = 
+label-urgent-padding = 5
+;label-urgent-foreground = #FA8007
+label-urgent-foreground = #FF0000
+
+
+;[module/bitcoin]
+;type = custom/script
+;interval = 10
+;format = <label>
+;format-prefix = " "
+;tail = true
+;format-prefix-foreground = ${colors.foreground-alt}
+;exec = ~/.config/polybar/scripts/bitcoin
+
+
+[module/mocp]
+type = custom/script
+interval = 1
+format = <label>
+format-prefix = "  "
+exec = ~/.config/polybar/scripts/mocp/mocp.sh
+click-left = mocp -f
+click-right = mocp -r
+click-middle = mocp -P
+
+
+[module/vlc]
+type = custom/script
+interval = 1
+label = %output:0:100:...%
+exec = ~/.config/polybar/scripts/mpris.sh
+click-left = playerctl -p vlc play-pause
+click-right = playerctl -p vlc next
+scroll-up = playerctl -p vlc volume 0.02+
+scroll-down = playerctl -p vlc volume 0.02-
+;Requires: playerctl
+;Reference: https://github.com/jaagr/polybar/wiki/User-contributed-modules
+
+
+;http://dotshare.it/dots/8251/
+;Reference: https://jmutai.com/2017/03/21/how-to-configure-mpd-and-ncmpcpp-on-linux/
+;[module/mpd]
+;type = internal/mpd
+;interval = 1
+;label =  <label-song> <icon-[random|repeat|repeatone]> <bar-progress>
+
+;host = 127.0.0.1
+;port = 6600
+
+;format-online = <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next>   <label-time> <label-song> <bar-progress>
+;format-offline =   Off
+;format-offline = MPD Off
+;label-song =  %artist% - %title%
+
+; Awesome Font >                    
+;icon-play = 
+;icon-pause = 
+;icon-stop =  
+;icon-prev = 
+;icon-next = 
+;icon-seekb = 
+;icon-seekf = 
+;icon-random = 
+;icon-repeat = 
+;icon-repeatone = 

@@ -6,6 +6,7 @@ base-devel
 chromium
 compton
 cowsay
+curl
 dmenu
 dunst
 feh
@@ -25,7 +26,7 @@ gst-plugins-good
 gst-plugins-ugly
 gvfs
 htop
-i3-wm
+i3-gaps
 i3lock
 i3status
 kitty
@@ -80,11 +81,11 @@ xcb-util-image
 xcb-util-wm
 xcb-util-cursor
 xcb-util-xrm
-xcb-xkb
 alsa-lib
 libpulse
-i3-wm
 jsoncpp
 libmpdclient
 libcurl-compat
-libnl-genl
+jq
+playerctl
+polybar
