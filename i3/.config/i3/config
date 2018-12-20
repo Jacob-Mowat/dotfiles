@@ -5,8 +5,8 @@
 # Set the Mod key
 ###########################
 # Options: (Mod1=<Alt>, Mod4=<Super>)
-set $mod Mod4;
-set $mod2 Mod1;
+set $mod Mod4
+# set $mod2 Mod1
 
 # set default desktop layout (default is tiling)
 # Example: workspace_layout tabbed
