@@ -1,10 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Enable command full-tracing(x) and error handling(e)
 set -xe
 
-# Make sure `git` is installed
-sudo pacman -Sy git
+# Make sure the following is installed 
+sudo pacman -Sy --needed base-devel git wget yajl
 
 # Make directory for the `package-query` repo and the `yaourt` repo.
 mkdir -p temp-yaourt-repos

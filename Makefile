@@ -1,4 +1,4 @@
-default: install-yaourt install-packages enable-services link-config set-shell sync-neovim
+default: install-packages enable-services link-config set-shell sync-neovim
 
 install-yaourt:
 	./scripts/install-yaourt.sh
