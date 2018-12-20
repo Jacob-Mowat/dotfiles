@@ -4,7 +4,7 @@
 set -xe
 
 # Make sure `git` is installed
-sudo pacman -Sy git
+pacman -Sy git
 
 # Make temporary directory
 mkdir temp-polybar
