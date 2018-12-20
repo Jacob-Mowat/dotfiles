@@ -1,15 +1,16 @@
-# J
+# I3 Config File
+# Reference: http://i3wm.org/docs/userguide.html
 
-# i3 config file (v4)
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
-# Set mod key (Mod1=<Alt>, Mod4=<Super>)
-set $mod Mod4
+###########################
+# Set the Mod key
+###########################
+# Options: (Mod1=<Alt>, Mod4=<Super>)
+set $mod Mod4;
+set $mod2 Mod1;
 
 # set default desktop layout (default is tiling)
-#workspace_layout tabbed
+# Example: workspace_layout tabbed
 
-# Com essa opção você pode mover as janelas com Alt + botão esquerdo do mouse e redimensionar com Alt + botão direito do mouse.
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
@@ -49,7 +50,7 @@ bindsym $mod+Return exec kitty
 
 bindsym $mod+Ctrl+m exec xterm -e 'mocp' ;workspace 
 bindsym $mod+Ctrl+a exec xterm -e 'alsamixer' ;workspace 
-bindsym $mod+Ctrl+r exec kitty -e 'ranger'
+bindsym $mod+Ctrl+r exec kitty -e 'ranger';
 bindsym $mod+Ctrl+n exec xterm -e ncmpcpp -S visualizer ;workspace 
 
 
@@ -64,6 +65,8 @@ bindsym Cancel kill , workspace 
 
 #########################
 ## CapsLock/NumLock/SrollLock Event
+#########################
+
 # bindsym Caps_Lock ;exec paplay /home/zack/.sounds/ubuntu/stereo/complete.oga
 # bindsym Num_Lock ;exec paplay /home/zack/.sounds/freedesktop/stereo/window-attention.oga
 # bindsym Scroll_Lock ;exec paplay /home/zack/.sounds/freedesktop/stereo/phone-outgoing-calling.oga
@@ -72,10 +75,11 @@ bindsym Cancel kill , workspace 
 ########################################################
 # Menus (Programs launcher)
 ########################################################
-# Dmenu
-#bindsym $mod+space exec dmenu_run -i -p 'Manjaro Linux' -fn 'FontAwesome:pixelsize=11' -nb '#2B373E' -nf '#ffffff' -sf '#fdf6e3' -sb '#b58900' -l 20
 
-#bindsym $mod+space exec rofi -show drun -font "Terminus 11" -theme ~/.config/i3/scripts/sidebar.rasi
+# Dmenu
+# bindsym $mod+space exec dmenu_run -i -p 'Manjaro Linux' -fn 'FontAwesome:pixelsize=11' -nb '#2B373E' -nf '#ffffff' -sf '#fdf6e3' -sb '#b58900' -l 20
+# bindsym $mod+space exec rofi -show drun -font "Terminus 11" -theme ~/.config/i3/scripts/sidebar.rasi
+
 bindsym $mod+space exec rofi -show run -font "Terminus 11"
 
 ##########################
@@ -129,73 +133,34 @@ bindsym Print exec xfce4-screenshooter ;exec paplay /home/zack/.sounds/ubuntu/st
 
 
 ###########################################################
-# Start a program with a key binding & workspace          
+# Workspace Bindings
 ###########################################################
-#
-bindsym $mod+1 exec palemoon ;workspace 
-bindsym $mod+2 exec firefox ;workspace 
+bindsym $mod+1 workspace 1;
+bindsym $mod+2 workspace 2;
+bindsym $mod+3 workspace 3;
+bindsym $mod+4 workspace 4;
+bindsym $mod+5 workspace 5;
+bindsym $mod+6 workspace 6;
+bindsym $mod+7 workspace 7;
+bindsym $mod+8 workspace 8;
+bindsym $mod+9 workspace 9;
+bindsym $mod+0 workspace 10;
 
-bindsym XF86Favorites exec chromium ;workspace 
-#
-bindsym $mod+3 exec simple-scan ;workspace 
-#
-bindsym $mod+4 exec supertux2 ;workspace 
-#
-bindsym $mod+5 exec popcorntime ;workspace 
-#
-bindsym $mod+6 exec gvim ;workspace 
-bindsym $mod+7 exec wps ;workspace 
-bindsym $mod+8 exec gedit ;workspace 
-#
-bindsym $mod+9 exec opera ;workspace 
-bindsym $mod+0 exec stremio ;workspace  
+# binding a key combo to open a application on a workspace
+# Example: bindsym $mod+F9 exec vrtualbox ;workspace 
 
-
-##############################################
-# Logitech keyboard Config / Jetline keyboard
-##############################################
-# Tecla: FN+F1 (Worksapce 1)
-bindsym XF86HomePage workspace 
-#
-# Tecla: FN+F2 (Thunderbird)
-bindsym XF86Mail exec ~/Telegram/Telegram ;workspace 
-bindsym $mod+F7 exec Whatsapp ;workspace 
-#
-# Tecla: FN+F3 (PCmanFM)
-#bindsym XF86Search exec pcmanfm ;workspace 
-bindsym XF86MyComputer exec pcmanfm ;workspace 
-#
-# Tecla: FN+F4 (VLC)
-#bindsym XF86Tools exec vlc ;workspace 
-bindsym XF86AudioMedia exec vlc ;workspace 
-
-# Tecla: FN+F5, F6, F7 não detectado
-# Tecla: FN+F6 (Rofi Exit)
-# Tecla: FN+F11 pamac-manager (Microsoft)
-
-# Tecla: FN+F12 (Calculator)
-bindsym XF86Calculator exec galculator ;workspace 
-
-# Jetline keyboard
-# Pamac Manager
-bindsym XF86Search exec pamac-manager ;workspace 
-
-# VirtualBox
-bindsym $mod+F9 exec vrtualbox ;workspace 
-
-
-#                                  ::       
 ######################################
 # Application rules
+######################################
 
 # Chrome, Firefox, Telegram
-  assign [class="^Chromium$"] → 
-  assign [class="^Pale moon$"] → 
-  assign [class="^Firefox$"] → 
-  assign [class="^Opera$"] → 
+# assign [class="^Chromium$"] → 
+# assign [class="^Pale moon$"] → 
+# assign [class="^Firefox$"] → 
+# assign [class="^Opera$"] → 
 
 # Terminator
-  assign [class="^Terminator$"] → 
+  assign [class="^Terminator$"]  → 
   assign [class="^Xterm$"] → 
 
 # PCmanFM
@@ -538,3 +503,16 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+bar {
+  position bottom
+  output primary 
+  status_command i3status
+
+  colors {
+    background #000000
+  }
+
+  workspace_buttons yes
+}
+
