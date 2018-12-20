@@ -6,3 +6,4 @@ stow -R neovim
 stow -R kitty
 stow -R htop
 stow -R rofi
+stow -R xbacklight

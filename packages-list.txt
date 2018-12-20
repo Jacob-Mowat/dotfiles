@@ -92,3 +92,5 @@ playerctl
 polybar
 check
 nitrogen
+redshift
+gpsd
