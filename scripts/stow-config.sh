@@ -1,5 +1,6 @@
 #!/bin/zsh
 
 stow -R i3
-stow -R kitty
 stow -R polybar 
+stow -R neovim 
+stow -R kitty
