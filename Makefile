@@ -12,10 +12,10 @@ enable-services:
 	sudo tlp start
 
 link-config: 
-	stow --restow `ls -d ./configs/*/`
+	./scripts/stow-all.sh
 
 set-shell:
-	chsh -s `which fish` # might change this too zsh, if I see the reason too.
+	chsh -s `which zsh` # `fish` is another alternative
 
 sync-neovim:
 	./configs/neovim/.config/nvim/sync.sh
