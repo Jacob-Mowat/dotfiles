@@ -89,3 +89,4 @@ libcurl-compat
 jq
 playerctl
 polybar
+vimdiff
