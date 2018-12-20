@@ -1,4 +1,4 @@
-default: install-packages enable-services link-config set-shell sync-neovim
+default: install-packages enable-services link-all sync-neovim
 
 install-yaourt:
 	./scripts/install-yaourt.sh
@@ -11,8 +11,9 @@ enable-services:
 	# sudo systemctl disable systemd-rfkill
 	# sudo tlp start
 
-link-config: 
-	./scripts/stow-all.sh
+link-all: 
+	./scripts/stow-core.sh
+	./scripts/stow-config.sh
 
 set-shell:
 	chsh -s `which zsh` # `fish` is another alternative
