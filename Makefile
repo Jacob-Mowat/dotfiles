@@ -26,3 +26,7 @@ set-shell:
 
 sync-neovim:
 	~/.config/nvim/sync.sh
+
+use-all-cores:
+	sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j5"/g' /etc/makepkg.conf
+	sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T 4 -z -)/g' /etc/makepkg.conf
