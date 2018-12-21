@@ -48,9 +48,9 @@ bindsym $mod+Tab exec rofi -show window
 # start Kitty
 bindsym $mod+Return exec kitty
 
-bindsym $mod+Ctrl+m exec xterm -e 'mocp' ;workspace 
-bindsym $mod+Ctrl+a exec xterm -e 'alsamixer' ;workspace 
-bindsym $mod+Ctrl+r exec kitty -e 'ranger';
+bindsym $mod+Ctrl+m exec kitty -e 'mocp'
+bindsym $mod+Ctrl+a exec kitty -e 'alsamixer'
+bindsym $mod+Ctrl+r exec kitty -e 'ranger'
 bindsym $mod+Ctrl+n exec xterm -e ncmpcpp -S visualizer ;workspace 
 
 
@@ -88,12 +88,12 @@ bindsym $mod+space exec rofi -show run -font "Terminus 11"
 
 # Nagbar:
 set $Locker i3lock && sleep 1
-set $mode_system Exit   (F)ancy | (H)ibernate | (L)ogout | (S)uspend | (R)eboot | (S)hutdown
+set $mode_system Exit   (F)ancy | (H)ibernate | (L)ogout | (U)Suspend | (R)eboot | (S)hutdown
 mode "$mode_system" {
     bindsym f exec --no-startup-id i3lock-fancy
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym l exec --no-startup-id i3-msg exit, mode "default"
-    bindsym  exec --no-startup-id systemctl suspend, mode "default"
+    bindsym u exec --no-startup-id systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"
 
@@ -101,7 +101,7 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-#bindsym $mod+d mode "$mode_system"
+bindsym $mod+d mode "$mode_system"
 
 ### Morc menu
 # start program launcher
@@ -153,93 +153,49 @@ bindsym $mod+0 workspace 10;
 # Application rules
 ######################################
 
-# Chrome, Firefox, Telegram
-# assign [class="^Chromium$"] → 
-# assign [class="^Pale moon$"] → 
-# assign [class="^Firefox$"] → 
-# assign [class="^Opera$"] → 
+# Telegram, Whatsapp
+  assign [class="^Telegram$"] → 0
+#  assign [class="^WhatsApp$"] → 0
 
-# Terminator
-  assign [class="^Terminator$"]  → 
-  assign [class="^Xterm$"] → 
+# VLC, Spotify, Poccorntime
+  assign [class="^VLC$"] → 8 
+  assign [class="^Spotify$"] → 9
+  assign [class="^Popcorntime$"] → 8
 
-# PCmanFM
-  assign [class="^Pcmanfm$"] → 
-
-# Scanner
-  assign [class="^Simple-Scan$"] → 
-
-# GVim, Libreoffice, Mousepad
-  assign [class="^Gvim$"] → 
-  assign [class="^WPS Writer$"] → 
-  assign [class="^Libreoffice$"] → 
-  assign [class="^Gedit$"] → 
-
-# Thunderbird, Telegram...
-# assign [class="^Thunderbird$"] → 
-  assign [class="^Telegram$"] → 
-  assign [class="^WhatsApp$"] → 
-
-# VLC, Spotify
-  assign [class="^VLC$"] →  
-  assign [class="^Spotify$"] → 
-  assign [class="^Stremio$"] → 
-  assign [class="^Popcorntime$"] → 
-
-# Calc
-  assign [class="^Galculator$"] → 
-
-# Várias aplicações na mesma workspace
-  assign [class="^Pamac-manager$"] → 
-  assign [class="^Timeshift$"] → 
-  assign [class="^Transmission$"] → 
-  assign [class="^Lxappearance$"] → 
-  assign [class="^Gimp$"] → 
-  assign [class="^Pavucontrol$"] → 
-  assign [class="^Nitrogen$"] → 
-  assign [class="^Green-Recorder$"] → 
-
-# Electrum
-  assign [class="^Electrum$"] → 
-
-# TimeShift
-  assign [class="^Timeshift$"] → 
+# Various applications mapped to workspaces
+  assign [class="^Pamac-manager$"] → 7
+  assign [class="^Timeshift$"] → 7
+  assign [class="^Transmission$"] → 8
+  assign [class="^Lxappearance$"] → 7
+  assign [class="^Gimp$"] → 7
+  assign [class="^Pavucontrol$"] → 7
+  assign [class="^Nitrogen$"] → 7
 
 # VirtualBox
-  assign [class="^Virtualbox$"] → 
+  assign [class="^Virtualbox$"] → 6
 
  
 # Rename workspace with i3-input using numbers and text
-bindsym $mod+Shift+n exec i3-input -F 'rename workspace to "%s"' -P 'Renomear workspace: '
-  
+bindsym $mod+Shift+n exec i3-input -F 'rename workspace to "%s"' -P 'Rename workspace: '
 
 #########################################  
 # Make a terminal sticky that was started as a notepad
-#for_window [instance=notepad] sticky enable
-
-# The middle button over a titlebar kills the window
-# Fechar work-tab com clique direito
-bindsym --release button3 kill
-#bindsym --whole-window button3 kill
+for_window [instance=notepad] sticky enable
 
 #########################################
 ## Moving on
-# Saltar para janela urgente
+#########################################
 bindsym $mod+x [urgent=latest] focus
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
 
-# Mover entre workspaces 
+# Move workspaces
 bindsym $mod+Left workspace prev
 bindsym $mod+Right workspace next
-# Multimedia Keyboard
 
-# Foco de aplicativo aberto em abas
-#tabbed
-#bindsym $mod+Tab focus right
-#stacking
+# Etc
 bindsym $mod+Up focus up
 bindsym own focus down
 
@@ -288,54 +244,19 @@ bindsym $mod+Shift+s sticky toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-
-#Scratchpad
-# move the currently focused window to the scratchpad
-#bindsym $mod+Shift+minus move scratchpad
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-#bindsym $mod+minus scratchpad show
-
 # Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 
-
+bindsym $mod+Shift+Alt+Left move container left
+bindsym $mod+Shift+Alt+Right move container right
 
 ################################
 ## floating mode
 # Open specific applications in floating mode
 
-for_window [title="alsamixer"] floating enable border none
-for_window [class="Calamares"] floating enable border none
-for_window [class="Clipgrab"] floating enable border none
-for_window [title="File Transfer*"] floating enable border none
-for_window [class="Galculator"] floating enable border none
-for_window [class="Electrum"] floating enable border none
-for_window [class="GParted"] floating enable border none
-for_window [title="i3_help"] floating enable border normal
-for_window [class="Lightdm-gtk-greeter-settings"] floating enable border none
 for_window [class="Lxappearance"] floating enable border none
-for_window [class="Manjaro Settings Manager"] floating enable border none
-for_window [class="Nitrogen"] floating enable border none
-#for_window [class="Pamac-manager"] floating enable border none
 for_window [class="Pamac-manager"] floating enable border none; focus mode_toggle
 for_window [class="Pavucontrol"] floating enable border none
-for_window [class="Qtconfig-qt4"] floating enable border none
-for_window [class="Simple-scan"] floating enable border none
-for_window [class="(?i)System-config-printer.py"] floating enable border none
-#for_window [class="Skype"] floating enable border normal
-for_window [class="Thus"] floating enable border none
-for_window [class="Timeset-gui"] floating enable border none
-for_window [class="(?i)virtualbox"] floating enable border none
 for_window [class="Vlc"] floating enable border none
-for_window [class="Telegram"] floating enable border none
-for_window [class="Xterm"] floating enable border none
-for_window [class="Xfburn"] floating enable border none
-#for_window [class="Pcmanfm"] floating enable border normal
-for_window [class="Vlc"] floating enable border none
-#for_window [class="Grub-customizer"] floating enable border normal
-for_window [class="Transmission-gtk"] floating enable border none
-for_window [class="Green-Recorder"] floating enable border none
-for_window [class="CPUpower-gui"] floating enable border none
+# for_window [class="CPUpower-gui"] floating enable border none
 
 
 
@@ -362,7 +283,7 @@ mode "  " {
         bindsym j resize shrink width 5 px or 5 ppt
         bindsym k resize grow height 5 px or 5 ppt
         bindsym l resize shrink height 5 px or 5 ppt
-        bindsym odiaeresis resize grow width 5 px or 5 ppt
+        bindsym h resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -379,7 +300,6 @@ mode "  " {
 # Autostart applications
 ##############################################################################
 ## adjustment of i3bar battery reading (only run at the very first login):
-#exec --no-startup-id /usr/bin/adjust_i3statusconf
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id /usr/bin/compton --config ~/bin/compton.conf
 exec --no-startup-id nitrogen --restore
@@ -388,8 +308,6 @@ exec --no-startup-id volumeicon
 #exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 #exec --no-startup-id /usr/bin/radiotray-ng
-#exec --no-startup-id xfce4-clipman
-#exec --no-startup-id blueman
 #exec_always --no-startup-id sbxkb
 #exec --no-startup-id conky
 #exec --no-startup-id start_conky_maia
@@ -398,31 +316,21 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id numlockx
 #exec --no-startup-id indicator-keylock
 #exec --no-startup-id hp-systray
-exec --no-startup-id guake
-exec --no-startup-id /usr/bin/caffeine-indicator
 #exec --no-startup-id dropbox
 #exec --no-startup-id ~/Telegram/Telegram -startintray %m
-#exec --no-startup-id thunderbird
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #exec --no-startup-id solaar
 exec xscreensaver -no-splash
-exec --no-startup-id pulseaudio
 #exec --no-startup-id /opt/extras.ubuntu.com/calendar-indicator/bin/calendar-indicator
 #exec --no-startup-id /usr/sbin/mouseserver
 
 # Servidor de música
-exec --no-startup-id mpd
-
-#Workspaces
-#exec --no-startup-id ~/.config/i3/scripts/switch-workspace.py
+# exec --no-startup-id mpd
 
 #Polybar
-exec_always --no-startup-id killall polybar; polybar top &
-exec_always --no-startup-id killall polybar; polybar bottom &
-
-# execute nitrogen
-exec --no-startup-id nitrogen --restore
-
+# TODO: Fix polybar!
+# exec_always --no-startup-id killall polybar; polybar top &
+# exec_always --no-startup-id killall polybar; polybar bottom &
 
 #############################################
 ##  Numix Blank (customized)
@@ -503,16 +411,3 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
-bar {
-  position bottom
-  output primary 
-  status_command i3status
-
-  colors {
-    background #000000
-  }
-
-  workspace_buttons yes
-}
-
