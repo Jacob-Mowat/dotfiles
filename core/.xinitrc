@@ -24,3 +24,4 @@ fi
 feh --bg-scale /home/zaxquit/Pictures/background.jpg
 
 exec i3
+compton -c -b
