@@ -308,36 +308,18 @@ mode "  " {
 ##############################################################################
 ## adjustment of i3bar battery reading (only run at the very first login):
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id /usr/bin/compton --config ~/bin/compton.conf
-exec --no-startup-id nitrogen --restore
+exec --no-startup-id nitrogen --restore; sleep 1; compton -c -b --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
-#exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
-#exec --no-startup-id /usr/bin/radiotray-ng
-#exec_always --no-startup-id sbxkb
-#exec --no-startup-id conky
-#exec --no-startup-id start_conky_maia
-#exec --no-startup-id start_conky_green
 #exec --no-startup-id xautolock -time 30 -locker i3lock-fancy
 exec --no-startup-id numlockx
 #exec --no-startup-id indicator-keylock
 #exec --no-startup-id hp-systray
-#exec --no-startup-id dropbox
-#exec --no-startup-id ~/Telegram/Telegram -startintray %m
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
-#exec --no-startup-id solaar
 exec xscreensaver -no-splash
 #exec --no-startup-id /opt/extras.ubuntu.com/calendar-indicator/bin/calendar-indicator
 #exec --no-startup-id /usr/sbin/mouseserver
-
-# Servidor de música
-# exec --no-startup-id mpd
-
-#Polybar
-# TODO: Fix polybar!
-# exec_always --no-startup-id killall polybar; polybar top &
-# exec_always --no-startup-id killall polybar; polybar bottom &
 
 #############################################
 ##  Numix Blank (customized)
@@ -355,11 +337,35 @@ client.background           #121212
 # hide/unhide i3status bar
 #bindsym $mod+m bar mode toggle
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# Start i3bar to display a workspace bar (plus the system information i3status if available)
 #bar {
-#        status_command i3status
+# i3bar_command i3bar
+# status_command i3status
+# position bottom
+#
+### please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+##  tray_output primary
+##  tray_output eDP1
+#
+# bindsym button4 nop
+# bindsym button5 nop
+##   font xft:URWGothic-Book 11
+# strip_workspace_numbers yes
+#
+#    colors {
+#        background #222D31
+#        statusline #F9FAF9
+#        separator  #454947
+#
+##                      border  backgr. text
+#        focused_workspace  #F9FAF9 #16a085 #292F34
+#        active_workspace   #595B5B #353836 #FDF6E3
+#        inactive_workspace #595B5B #222D31 #EEE8D5
+#        binding_mode       #16a085 #2C2C2C #F9FAF9
+#        urgent_workspace   #16a085 #FDF6E3 #E5201D
+#    }
 #}
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 
 #############################

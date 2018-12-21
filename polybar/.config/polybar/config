@@ -1,272 +1,509 @@
-;=====================================================
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/jaagr/polybar
-;
-;   The README contains alot of information
-;
-;=====================================================
-
-;[colors]
-;background = #222
-;background-alt = #444
-;foreground = #dfdfdf
-;foreground-alt = #55
-;primary = #ffb52a
-;secondary = #e60053
-;alert = #bd2c40
-
-[global/wm]
-margin-top = 3
-margin-bottom = 3
-
-[settings]
-screenchange-reload = true
+; All credit for the current version of this polybar goes to nicomazz
 
 [bar/top]
-bottom = false
-monitor = DP-8.0
+enable-ipc = true
+bottom = true
+monitor = eDP1
 width = 100%
-height = 25
+height = 43
+dpi = 192
 
-modules-left = apps i3
-modules-center = mpd
-modules-right = 
+background = #1f1f1f
+foreground = #eee
 
-;Cores do painel
-;background transparent
-background = #00000000
-;Flatabulous Theme
-;background = #434343
-;Arc Theme
-;background = #2F343F
-;Numix Theme
-;background = #444444
-
+line-color = ${bar/bottom.background}
 line-size = 1
 
-;Traço acima no módulo
-overline-size = 1
-;overline-color = #FF0000
-;Numix theme
-overline-color = E4524B
+padding-left = 0
+padding-right = 0
+module-margin-left = 3
+module-margin-right = 3
 
-;Traço abaixo no módulo
-;underline-size = 1
-;underline-color = #FF0000
 
-;Traço abaixo em todo painel
-;border-bottom-size = 1
-;border-bottom-color = #BBBBBB
+separator = |
 
-spacing = 3
-padding-left = 2
-padding-right = 2
-module-margin-left = 1
-module-margin-right = 1
+;font-0 = NotoSans-Regular:size=19;-1
 
-;font-N = <fontconfig pattern>;<vertical offset>
-font-0 = Terminus:pixelsize=12;0
-font-1 = Terminus:fontformat=truetype:size=12:antialias=false;0
-font-2 = FontAwesome:pixelsize=10;0
-font-3 = MaterialDesignIcons:size=11;0
+;font-0 = Misc\ Termsynu:size=19:antialias=false;3
+;font-0 = NotoSans-Regular:size=10;2
+;font-1 = Material\ Icons:size=10;0
+;font-2 = Misc\ Termsynu:size=10;-2
+;font-3 = FontAwesome:size=9;0
 
-;Systray
-tray-position = right
-tray-padding = 1
-;tray-transparent = false
-tray-transparent = true
-;tray-background = #0000000
-tray-detached = true
-;tray-offset-x = -6
-;tray-offset-y = 3
-tray-offset-x = 1
-tray-offset-y = -1
+font-0 = NotoSans-Regular:size=9;0
+font-1 = Material\ Icons:size=11;2
+font-2 = xos4\ Terminus:size=14;0
+font-3 = Siji:pixelsize=11;1
+font-4 = FontAwesome:size=11;0
+
+
+modules-left = mpd i3 
+modules-right = cpu memory temperature filesystem xkeyboard volume wireless-network consumation  battery date        
+
+wm-restack = i3
+
+tray-position = right 
 tray-scale = 1.0
+;tray-transparent = true
+tray-background = ${self.background}
+tray-maxsize = 64
 
-;Navegação
+tray-offset-y = 0
+
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
-;click-left = i3wm-wsnext
-;click-right = i3wm-wsprev
 
+overline-size = 10
+overline-color = ${self.background}
+underline-size = 2
+underline-color = ${self.background}
 
 [bar/bottom]
-monitor = DP-8.0
+monitor = HDMI1
 bottom = true
 width = 100%
-height = 27
+height = 40
+dpi = 192
 
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
-click-left = i3wm-wsnext
-click-right = i3wm-wsprev
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
 
-modules-left = cpu memory eth
-modules-center = date1 date2
-modules-right = mocp volume dropbox powermenu
+background = ${bar/top.background}
+foreground = ${bar/top.foreground}
 
-;tray-position = right
-;tray-padding = 1
-;tray-transparent = false
-;tray-detached = true
-;tray-background = #000000
-;tray-offset-x = -2
-;tray-offset-y = -2
-;tray-scale = 1.0
-;tray-maxsize = 14
+line-color = ${bar/top.background}
+line-size = 2
 
-;Cores do painel
-;background transparente
-background = #0000000
-;Flatabulous Master
-;background = #434343
-;background = #2F343F
-;foreground = ${colors.foreground}
-;Numix Theme
-;background = #444444
+spacing = 3
+padding-right = 4
+module-margin-left = 0 
+module-margin-right = 6
 
-;Traço acima
-;overline-size = 1
-;overline-color = #FF0000
-;Traço abaixo
-underline-size = 2
-underline-color = #FF0000
+;font-0 = NotoSans-Regular:size=10;0
+font-0 = NotoSans-Regular:size=9;0
+font-1 = Material\ Icons:size=11;2
+font-2 = xos4\ Terminus:size=14;0
+font-3 = Siji:pixelsize=11;1
+font-4 = FontAwesome:size=11;0
 
-;Traço em todo painel
-;border-top-size = 1
-;border-top-color = #BBBBBB
+modules-left = i3 
+modules-right =   filesystem volume backlight   battery date
 
-spacing = 2
-padding-left = 1
-padding-right = 1
-module-margin-left = 1
-module-margin-right = 1
+[module/backlight]
+type = internal/backlight
+format = <label>
+#format = <ramp> <bar>
 
-;font-N = <fontconfig pattern>;<vertical offset>
-font-0 = Terminus:pixelsize=12;0
-font-1 = Terminus:fontformat=truetype:size=12:antialias=false;0
-font-2 = FontAwesome:pixelsize=10;0
-font-3 = MaterialDesignIcons:size=11;0
+card =  intel_backlight
+
+label = %percentage%%
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-font = 3
+bar-indicator-foreground = #ff
+bar-fill = ─
+bar-fill-font = 3
+bar-fill-foreground = #c9665e
+bar-empty = ─
+bar-empty-font = 3
+bar-empty-foreground = #44
+
+[module/consumation]
+type = custom/script
+
+exec = /path/to/power.sh
+interval = 2
+
+[module/battery]
+type = internal/battery
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+label-charging = %percentage%% %time%h
+label-discharging = %percentage%% %time%h 
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+bar-capacity-width = 10
+bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+bar-capacity-fill = █
+bar-capacity-fill-foreground = #ddffffff
+bar-capacity-fill-font = 3
+bar-capacity-empty = █
+bar-capacity-empty-font = 3
+bar-capacity-empty-foreground = #44ffffff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[module/bspwm]
+type = internal/bspwm
+
+ws-icon-0 = term;
+ws-icon-1 = web;
+ws-icon-2 = code;
+ws-icon-3 = music;
+ws-icon-4 = irssi;
+ws-icon-default = 
+
+format = <label-state> <label-mode>
+
+label-dimmed-underline = ${BAR.background}
+
+label-active = %icon%
+label-active-foreground = #fff
+label-active-background = #773f3f3f
+label-active-underline = #c9665e
+label-active-font = 4
+label-active-padding = 4
+
+label-occupied = %icon%
+label-occupied-foreground = #dd
+label-occupied-underline = #666
+label-occupied-font = 4
+label-occupied-padding = 4
+
+label-urgent = %icon%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-underline = #9b0a20
+label-urgent-font = 4
+label-urgent-padding = 4
+
+label-empty = %icon%
+label-empty-foreground = #55
+label-empty-font = 4
+label-empty-padding = 4
+
+label-monocle = 
+label-monocle-underline = ${module/bspwm.label-active-underline}
+label-monocle-background = #33ffffff
+label-monocle-padding = 2
+
+label-locked = 
+label-locked-foreground = #bd2c40
+label-locked-underline = ${module/bspwm.label-monocle-underline}
+label-locked-padding = ${module/bspwm.label-monocle-padding}
+
+label-sticky = 
+label-sticky-foreground = #fba922
+label-sticky-underline = ${module/bspwm.label-monocle-underline}
+label-sticky-padding = ${module/bspwm.label-monocle-padding}
+
+label-private = 
+label-private-foreground = #bd2c40
+label-private-underline = ${module/bspwm.label-monocle-underline}
+label-private-padding = ${module/bspwm.label-monocle-padding}
+
+[module/bspwm-tmp]
+type = internal/bspwm
+format = <label-state>
+
+label-active = 
+label-active-padding = 1
+label-occupied = 
+label-occupied-padding = 1
+label-empty = 
+label-empty-padding = 1
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format = <label> <ramp-coreload>
+label = CPU
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 2
+ramp-coreload-0-foreground = #aaff77
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 2
+ramp-coreload-1-foreground = #aaff77
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 2
+ramp-coreload-2-foreground = #aaff77
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 2
+ramp-coreload-3-foreground = #aaff77
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 2
+ramp-coreload-4-foreground = #fba922
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 2
+ramp-coreload-5-foreground = #fba922
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 2
+ramp-coreload-6-foreground = #ff5555
+ramp-coreload-7 = █
+ramp-coreload-7-font = 2
+ramp-coreload-7-foreground = #ff5555
+
+[module/date]
+type = internal/date
+date =    %%{F#99}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M:%S%%{F-}
+date-alt = %%{F#fff}%A, %d %B %Y  %%{F#fff}%H:%M%%{F#666}:%%{F#fba922}%S%%{F-}
+
+[module/memory]
+type = internal/memory
+format = <label> <bar-used>
+label = RAM
+
+bar-used-width = 30
+bar-used-foreground-0 = #aaff77
+bar-used-foreground-1 = #aaff77
+bar-used-foreground-2 = #fba922
+bar-used-foreground-3 = #ff5555
+bar-used-indicator = |
+bar-used-indicator-font = 6
+bar-used-indicator-foreground = #ff
+bar-used-fill = ─
+bar-used-fill-font = 6
+bar-used-empty = ─
+bar-used-empty-font = 6
+bar-used-empty-foreground = #444444
+
+[module/mpd]
+type = internal/mpd
+format-online = <icon-prev> <icon-stop> <toggle> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time>  <label-song>
+
+icon-play = 
+icon-pause = 
+icon-stop = 
+icon-prev = 
+icon-next = 
+icon-random = 
+icon-repeat = 
+
+toggle-on-foreground =
+toggle-off-foreground = #55
+
+bar-progress-width = 45
+bar-progress-format = %{A4:mpdseek+2: A5:mpdseek-2:}%fill%%indicator%%empty%%{A A}
+bar-progress-indicator = |
+bar-progress-indicator-foreground = #ff
+bar-progress-indicator-font = 3
+bar-progress-fill = ─
+bar-progress-fill-foreground = #bb
+bar-progress-fill-font = 3
+bar-progress-empty = ─
+bar-progress-empty-font = 3
+bar-progress-empty-foreground = #44
+
+[module/wireless-network]
+type = internal/network
+interface = wlp5s0
+interval = 1.0
+ping-interval = 10
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = %local_ip%    %downspeed%    %upspeed%
+label-disconnected =    not connected
+label-disconnected-foreground = #66
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+
+animation-packetloss-0 = 
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 
+animation-packetloss-1-foreground = ${bar/top.foreground}
+animation-packetloss-framerate = 500
 
 
-;************
-; Modules
-;************
+[module/volume]
+type = internal/volume
+;speaker-mixer = Speaker
+;headphone-mixer = Headphone
+:headphone-id = 9
+
+format-volume = <ramp-volume> <label-volume>
+label-muted =   muted
+label-muted-foreground = #66
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted =  %mountpoint%: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = #66
+
+
+[module/powermenu]
+type = custom/menu
+
+format-padding = 5
+
+label-open = 
+label-close = 
+label-separator = |
+
+menu-0-0 = Terminate WM
+menu-0-0-foreground = #fba922
+menu-0-0-exec = bspc quit -1
+menu-0-1 = Reboot
+menu-0-1-foreground = #fba922
+menu-0-1-exec = menu_open-1
+menu-0-2 = Power off
+menu-0-2-foreground = #fba922
+menu-0-2-exec = menu_open-2
+
+menu-1-0 = Cancel
+menu-1-0-foreground = #fba922
+menu-1-0-exec = menu_open-0
+menu-1-1 = Reboot
+menu-1-1-foreground = #fba922
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = Power off
+menu-2-0-foreground = #fba922
+menu-2-0-exec = sudo poweroff
+menu-2-1 = Cancel
+menu-2-1-foreground = #fba922
+menu-2-1-exec = menu_open-0
+
+[module/clock]
+type = internal/date
+interval = 2
+date = %%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 5
+warn-temperature = 65
+
+format = <ramp> <label>
+;format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+;format-warn-underline = ${self.format-underline}
+
+label = %temperature%
+label-warn = HOT! %temperature%
+label-warn-foreground = #f00
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = #66
+
 
 [module/i3]
 type = internal/i3
-format = <label-state> <label-mode>
+
+pin-workspaces = true
+strip-wsnumbers = true
 index-sort = true
-;pin-workspaces = true
-;wrapping-scroll = true
-;strip-wsnumbers = true
 
-enable-click = true
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
-click-left = i3wm-wsprev
-;click-right = i3wm-wsnext
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
 
+ws-icon-0 = 1;♚
+ws-icon-1 = 2;♛
+ws-icon-2 = 3;♜
+ws-icon-3 = 4;♝
+ws-icon-4 = 5;♞
+ws-icon-default = ♟
+
+label-dimmed-underline = ${root.background}
+
+; Available tags:
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+format = <label-state> <label-mode>
+
+; Available tokens:
+;   %mode%
+; Default: %mode%
 label-mode = %mode%
-label-mode-padding = 1
-label-mode-foreground = #BBBBBB
+label-mode-padding = 0
+label-mode-background = #e60053
 
-label-focused = %name%
-;label-focused = 
-;label-focused = 
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-focused =  %index%
+label-focused-foreground = #ffffff
+label-focused-background = #3f3f3f
+label-focused-underline = #fba922
+label-focused-padding = 4
 
-label-indicator-padding = 2
-label-indicator-background = #BBBBBB
-label-indicator-underline = #FF0000
-;label-indicator-overline = #FF0000
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-unfocused = %index%
+label-unfocused-padding = 4
 
-label-focused-foreground = #BBBBBB
-label-focused-padding = 2
-;label-focused-background = #383838
-label-focused-underline = #FF0000
-;label-focused-overline= #FF0000
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-visible = %index%
+label-visible-underline = #555555
+label-visible-padding = 4
 
-label-unfocused = %name%
-;label-unfocused = 
-label-unfocused-foreground = #747474
-label-unfocused-padding = 1
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-urgent = %index%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 4
 
-label-visible = %name
-;label-visible = 
-label-visible-foregroud = #888888
-label-visible-padding = 1
-label-visible-background = #BBBBBB
-label-visible-underline = #FF0000
-;label-visible-overline = #FF0000
+; Separator in between workspaces
+label-separator = |
+label-separator-padding = 0
+label-separator-foreground = #ffb52a
 
-label-urgent = %name%
-;label-urgent = 
-;label-urgent = 
-;label-urgent = 
-;label-urgent = 
-label-urgent-padding = 5
-;label-urgent-foreground = #FA8007
-label-urgent-foreground = #FF0000
-
-
-;[module/bitcoin]
-;type = custom/script
-;interval = 10
-;format = <label>
-;format-prefix = " "
-;tail = true
-;format-prefix-foreground = ${colors.foreground-alt}
-;exec = ~/.config/polybar/scripts/bitcoin
-
-
-[module/mocp]
+[module/spotify]
 type = custom/script
-interval = 1
+interval = 5
+format-prefix = "  "  
 format = <label>
-format-prefix = "  "
-exec = ~/.config/polybar/scripts/mocp/mocp.sh
-click-left = mocp -f
-click-right = mocp -r
-click-middle = mocp -P
+exec = ~/.config/polybar/spotify.py
 
 
-[module/vlc]
-type = custom/script
-interval = 1
-label = %output:0:100:...%
-exec = ~/.config/polybar/scripts/mpris.sh
-click-left = playerctl -p vlc play-pause
-click-right = playerctl -p vlc next
-scroll-up = playerctl -p vlc volume 0.02+
-scroll-down = playerctl -p vlc volume 0.02-
-;Requires: playerctl
-;Reference: https://github.com/jaagr/polybar/wiki/User-contributed-modules
+format-underline = #1db954
 
-
-;http://dotshare.it/dots/8251/
-;Reference: https://jmutai.com/2017/03/21/how-to-configure-mpd-and-ncmpcpp-on-linux/
-;[module/mpd]
-;type = internal/mpd
-;interval = 1
-;label =  <label-song> <icon-[random|repeat|repeatone]> <bar-progress>
-
-;host = 127.0.0.1
-;port = 6600
-
-;format-online = <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next>   <label-time> <label-song> <bar-progress>
-;format-offline =   Off
-;format-offline = MPD Off
-;label-song =  %artist% - %title%
-
-; Awesome Font >                    
-;icon-play = 
-;icon-pause = 
-;icon-stop =  
-;icon-prev = 
-;icon-next = 
-;icon-seekb = 
-;icon-seekf = 
-;icon-random = 
-;icon-repeat = 
-;icon-repeatone = 
+; vim:ft=dosiniP
