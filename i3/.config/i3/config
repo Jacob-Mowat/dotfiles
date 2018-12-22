@@ -1,6 +1,12 @@
 # I3 Config File
 # Reference: http://i3wm.org/docs/userguide.html
 
+for_window [class="^.*"] border pixel 3
+gaps inner 12
+gaps outer 12
+gaps top 50
+gaps bottom 50
+
 ###########################
 # Set the Mod key
 ###########################
@@ -15,7 +21,7 @@ set $mod Mod4
 floating_modifier $mod
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-new_window pixel 10
+new_window none
 new_float normal
 
 # Desativar as bordas das janelas 
@@ -372,9 +378,6 @@ client.background           #121212
 ### settings for i3-gaps: ###
 #############################
 #############################
-# Set inner/outer gaps
-gaps inner 12
-gaps outer 0
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -382,11 +385,11 @@ gaps outer 0
 # gaps outer all plus 5
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-smart_gaps on
+# smart_gaps yes
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
-smart_borders on
+smart_borders on 
 
 # Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
 set $mode_gaps Gaps: (o) outer, (i) inner
