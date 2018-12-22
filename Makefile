@@ -1,4 +1,4 @@
-default: install-yaourt install-packages install-rofi link-all set-rofi-theme set-shell sync-neovim
+default: install-yaourt install-packages install-rofi link-all set-rofi-theme set-shell sync-neovim use-all-cores
 
 install-yaourt:
 	./scripts/install-yaourt.sh

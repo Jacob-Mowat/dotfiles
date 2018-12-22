@@ -92,6 +92,7 @@ set $mode_system Exit   (F)ancy | (H)ibernate | (L)ogout | (U)Suspend | (R)eb
 mode "$mode_system" {
     bindsym f exec --no-startup-id i3lock-fancy
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+# Move focused container to workspace
     bindsym l exec --no-startup-id i3-msg exit, mode "default"
     bindsym u exec --no-startup-id systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
@@ -308,6 +309,7 @@ mode "  " {
 ##############################################################################
 ## adjustment of i3bar battery reading (only run at the very first login):
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec_always --no-startup-id ~/.config/polybar/polybar.sh &
 exec --no-startup-id nitrogen --restore; sleep 1; compton -c -b --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
@@ -365,8 +367,6 @@ client.background           #121212
 #        urgent_workspace   #16a085 #FDF6E3 #E5201D
 #    }
 #}
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
 
 #############################
 ### settings for i3-gaps: ###
