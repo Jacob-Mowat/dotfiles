@@ -10,4 +10,4 @@ while pgrep -x polybar >/dev/null; do sleep 1; done
 polybar left &
 polybar center &
 polybar right &
-polybar bottom &
+# polybar bottom &
