@@ -1,6 +1,6 @@
 [user]
-	name = Jacob-Mowat
-	email = jacob@jmowat.me
+        name = Jacob-Mowat
+        email = jacob@jmowat.me
 [color]
   ui = true
 [push]
@@ -22,4 +22,6 @@
 [mergetool]
   prompt = false
 [core]
-	editor = subl3 --wait --new-window
+        editor = subl3 --wait --new-window
+[http "https://gitlab-student.macs.hw.ac.uk"]
+        sslVerify = false
