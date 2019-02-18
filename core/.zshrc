@@ -1,8 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/zaxquit/.oh-my-zsh"
+export ZSH="/home/zaxquit/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -83,10 +83,7 @@ else
 fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -98,8 +95,9 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
+# alias for running steam
+alias gamecenter='flatpak run com.valvesoftware.Steam'
+
 alias ssh='TERM=screen ssh'
 
 pulseaudio --start
-
-neofetch
